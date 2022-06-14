@@ -1,0 +1,102 @@
+﻿@model NeredeNeYesem.Models.Siniflar.MekanYorum
+@{ ViewBag.Title = "MekanDetay";
+                Layout = "~/Views/Shared/_TestLayout.cshtml"; }
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Personal Blog a Blogging Category Flat Bootstarp  Responsive Website Template | Single :: w3layouts</title>
+    <link href="~/web2/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="~/web2/css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Personal Blog Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!----webfonts---->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:100,400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic' rel='stylesheet' type='text/css'>
+    <!----//webfonts---->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--end slider -->
+
+
+</head>
+
+<body>
+    <div class="header">
+    </div>
+    <div class="single">
+        <div class="container">
+            <div class="col-md-8 single-main">
+                <div class="single-grid">
+                    @foreach (var x in Model.Deger1)
+                    {
+                        <img src="@x.FotoUrl" alt="" style="margin-bottom:20px" />
+                        <h2>@x.Baslik</h2>
+                        <p> @x.Aciklama</p>
+                    }
+
+                </div>
+                <div id="commentList">
+
+                </div>
+
+                <div class="content-form">
+                    <h3>Bir yorum yapınız.</h3>
+                    <form id="commentForm" method="post">
+                        <input type="text" placeholder="Kullanıcı Adı" name="KullaniciAdi" id="KullaniciAdi" required />
+                        <input type="text" placeholder="Mail Adresi" name="Mail" id="Mail" required />
+                        <textarea placeholder="Yorum" id="Yorum" name="Yorum"></textarea>
+                        <input type="submit" id="submitButton" value="Gönder" />
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    var url = window.location.href;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+    $.post("/YemekMekanlari/YorumListele", {
+        id: Number(id)
+    }, function (res) {
+        res.yorums.map((i, k) => {
+            $("#commentList").append(`<ul class="comment-list"><li>
+                            <img src="~/web2/images/avatar.png" class="img-responsive" alt="">
+                            <div class="desc">
+                                <p>${i.KullaniciAdi} :${i.Yorum} </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li> </ul>`)
+        })
+    })
+    $("#submitButton").click(function (e) {
+        e.preventDefault();
+        $.post("/YemekMekanlari/YorumYap2", {
+            KullaniciAdi: $("#KullaniciAdi").val(),
+            Mail: $("#Mail").val(),
+            Yorum: $("#Yorum").val(),
+            YemekMekanlariId: Number(id),
+        }, function (res) {
+            if (res.success == true) {
+
+                $("#commentList").append(`<ul class="comment-list"><li>
+                            <img src="~/web2/images/avatar.png" class="img-responsive" alt="">
+                            <div class="desc">
+                                <p>${res.yorum.KullaniciAdi} :${res.yorum.Yorum} </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li> </ul>`)
+                $("#commentForm").trigger('reset');
+
+            }
+        })
+    })
+</script>

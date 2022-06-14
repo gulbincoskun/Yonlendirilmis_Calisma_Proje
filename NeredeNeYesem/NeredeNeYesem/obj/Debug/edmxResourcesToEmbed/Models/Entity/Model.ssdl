@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeredeNeYesemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NeredeNeYesem.dbo.Iletisim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Iletisim">
+    <Key>
+      <PropertyRef Name="iletisimId" />
+    </Key>
+    <Property Name="iletisimId" Type="int" Nullable="false" />
+    <Property Name="iletisimAdSoyad" Type="nvarchar" MaxLength="50" />
+    <Property Name="iletisimMail" Type="nvarchar" MaxLength="100" />
+    <Property Name="iletisimTelefon" Type="nvarchar" MaxLength="50" />
+    <Property Name="iletisimKonu" Type="nvarchar" MaxLength="50" />
+    <Property Name="iletisimMesaj" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="int" Nullable="false" />
+    <Property Name="kategoriAd" Type="varchar" MaxLength="50" />
+    <Property Name="kategoriFotograf" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="MekanDetay">
+    <Key>
+      <PropertyRef Name="mekanDetayId" />
+    </Key>
+    <Property Name="mekanDetayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mekanDetayAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="mekanDetayFotograf" Type="nvarchar" MaxLength="50" />
+    <Property Name="mekanDetayAciklama" Type="nvarchar(max)" />
+    <Property Name="mekanDetayDurum" Type="nchar" MaxLength="10" />
+    <Property Name="mekanlarId" Type="int" />
+  </EntityType>
+  <EntityType Name="Mekanlar">
+    <Key>
+      <PropertyRef Name="mekanlarId" />
+    </Key>
+    <Property Name="mekanlarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mekanlarAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="mekanlarFotograf" Type="varchar" MaxLength="100" />
+    <Property Name="mekanlarDurum" Type="nchar" MaxLength="10" />
+    <Property Name="semtId" Type="int" />
+  </EntityType>
+  <EntityType Name="Sehirler">
+    <Key>
+      <PropertyRef Name="sehirId" />
+    </Key>
+    <Property Name="sehirId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sehirAd" Type="varchar" MaxLength="30" />
+    <Property Name="sehirFotograf" Type="varchar" MaxLength="100" />
+    <Property Name="sehirDurum" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Semtler">
+    <Key>
+      <PropertyRef Name="semtId" />
+    </Key>
+    <Property Name="semtId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="semtAd" Type="nvarchar" MaxLength="30" />
+    <Property Name="semtFotograf" Type="varchar" MaxLength="100" />
+    <Property Name="semtDurum" Type="nchar" MaxLength="10" />
+    <Property Name="sehirId" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Yonetici">
+    <Key>
+      <PropertyRef Name="yoneticiId" />
+    </Key>
+    <Property Name="yoneticiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yoneticiAd" Type="varchar" MaxLength="50" />
+    <Property Name="yoneticiSifre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Yorumlar">
+    <Key>
+      <PropertyRef Name="yorumId" />
+    </Key>
+    <Property Name="yorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yorumAdSoyad" Type="varchar" MaxLength="50" />
+    <Property Name="yorumMail" Type="varchar" MaxLength="50" />
+    <Property Name="yorumTarih" Type="smalldatetime" />
+    <Property Name="yorumOnay" Type="bit" />
+    <Property Name="yorumIcerik" Type="varchar" MaxLength="500" />
+    <Property Name="yorumPuan" Type="tinyint" />
+    <Property Name="mekanId" Type="int" />
+  </EntityType>
+  <Association Name="FK_MekanDetay_Mekanlar">
+    <End Role="Mekanlar" Type="Self.Mekanlar" Multiplicity="0..1" />
+    <End Role="MekanDetay" Type="Self.MekanDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mekanlar">
+        <PropertyRef Name="mekanlarId" />
+      </Principal>
+      <Dependent Role="MekanDetay">
+        <PropertyRef Name="mekanlarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mekanlar_Semtler">
+    <End Role="Semtler" Type="Self.Semtler" Multiplicity="0..1" />
+    <End Role="Mekanlar" Type="Self.Mekanlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semtler">
+        <PropertyRef Name="semtId" />
+      </Principal>
+      <Dependent Role="Mekanlar">
+        <PropertyRef Name="semtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Semtler_Sehirler">
+    <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="0..1" />
+    <End Role="Semtler" Type="Self.Semtler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehirler">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="Semtler">
+        <PropertyRef Name="sehirId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NeredeNeYesemModelStoreContainer">
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MekanDetay" EntityType="Self.MekanDetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mekanlar" EntityType="Self.Mekanlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sehirler" EntityType="Self.Sehirler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Semtler" EntityType="Self.Semtler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Iletisim" EntityType="Self.Iletisim" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Iletisim].[iletisimId] AS [iletisimId], 
+    [Iletisim].[iletisimAdSoyad] AS [iletisimAdSoyad], 
+    [Iletisim].[iletisimMail] AS [iletisimMail], 
+    [Iletisim].[iletisimTelefon] AS [iletisimTelefon], 
+    [Iletisim].[iletisimKonu] AS [iletisimKonu], 
+    [Iletisim].[iletisimMesaj] AS [iletisimMesaj]
+    FROM [dbo].[Iletisim] AS [Iletisim]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_MekanDetay_Mekanlar" Association="Self.FK_MekanDetay_Mekanlar">
+      <End Role="Mekanlar" EntitySet="Mekanlar" />
+      <End Role="MekanDetay" EntitySet="MekanDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mekanlar_Semtler" Association="Self.FK_Mekanlar_Semtler">
+      <End Role="Semtler" EntitySet="Semtler" />
+      <End Role="Mekanlar" EntitySet="Mekanlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Semtler_Sehirler" Association="Self.FK_Semtler_Sehirler">
+      <End Role="Sehirler" EntitySet="Sehirler" />
+      <End Role="Semtler" EntitySet="Semtler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

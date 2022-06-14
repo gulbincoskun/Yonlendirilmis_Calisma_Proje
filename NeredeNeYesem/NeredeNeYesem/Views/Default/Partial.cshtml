@@ -1,0 +1,39 @@
+﻿@using NeredeNeYesem.Models.Siniflar;
+@model List<YemekMekanlari>
+
+<style>
+    .orta .bolum2 {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .orta .bolum2 {
+            flex-basis: 290px;
+        }
+
+            .orta .bolum2  {
+                font-size: 2rem;
+            }
+
+            .orta .bolum2  {
+                font-size: 1.6rem;
+            }
+</style>
+
+<div class="orta kapsayici">
+    <div class="bolum2">
+        @foreach (var x in Model)
+        {
+            <div class="box20">
+                <a href="/YemekMekanlari/MekanDetay/@x.ID"><img src="@x.FotoUrl" alt="" style="width:320px; height:250px;" /> </a>
+                <div class="box-content">
+                    <a href="/YemekMekanlari/MekanDetay/@x.ID"> <h3 class="title">@x.Baslik</h3></a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@Html.Action("Partial2", "Default")
+

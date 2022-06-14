@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeredeNeYesemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="Int32" Nullable="false" />
+    <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="kategoriFotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MekanDetay">
+    <Key>
+      <PropertyRef Name="mekanDetayId" />
+    </Key>
+    <Property Name="mekanDetayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mekanDetayAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mekanDetayFotograf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mekanDetayAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="mekanDetayDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="mekanlarId" Type="Int32" />
+    <NavigationProperty Name="Mekanlar" Relationship="Self.FK_MekanDetay_Mekanlar" FromRole="MekanDetay" ToRole="Mekanlar" />
+  </EntityType>
+  <EntityType Name="Mekanlar">
+    <Key>
+      <PropertyRef Name="mekanlarId" />
+    </Key>
+    <Property Name="mekanlarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mekanlarAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mekanlarFotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mekanlarDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="semtId" Type="Int32" />
+    <NavigationProperty Name="MekanDetay" Relationship="Self.FK_MekanDetay_Mekanlar" FromRole="Mekanlar" ToRole="MekanDetay" />
+    <NavigationProperty Name="Semtler" Relationship="Self.FK_Mekanlar_Semtler" FromRole="Mekanlar" ToRole="Semtler" />
+  </EntityType>
+  <EntityType Name="Sehirler">
+    <Key>
+      <PropertyRef Name="sehirId" />
+    </Key>
+    <Property Name="sehirId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sehirAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="sehirFotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="sehirDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Semtler" Relationship="Self.FK_Semtler_Sehirler" FromRole="Sehirler" ToRole="Semtler" />
+  </EntityType>
+  <EntityType Name="Semtler">
+    <Key>
+      <PropertyRef Name="semtId" />
+    </Key>
+    <Property Name="semtId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="semtAd" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="semtFotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="semtDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="sehirId" Type="Int32" />
+    <NavigationProperty Name="Mekanlar" Relationship="Self.FK_Mekanlar_Semtler" FromRole="Semtler" ToRole="Mekanlar" />
+    <NavigationProperty Name="Sehirler" Relationship="Self.FK_Semtler_Sehirler" FromRole="Semtler" ToRole="Sehirler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Yonetici">
+    <Key>
+      <PropertyRef Name="yoneticiId" />
+    </Key>
+    <Property Name="yoneticiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="yoneticiAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yoneticiSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Yorumlar">
+    <Key>
+      <PropertyRef Name="yorumId" />
+    </Key>
+    <Property Name="yorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="yorumAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yorumMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="yorumTarih" Type="DateTime" Precision="0" />
+    <Property Name="yorumOnay" Type="Boolean" />
+    <Property Name="yorumIcerik" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="yorumPuan" Type="Byte" />
+    <Property Name="mekanId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Iletisim">
+    <Key>
+      <PropertyRef Name="iletisimId" />
+    </Key>
+    <Property Name="iletisimId" Type="Int32" Nullable="false" />
+    <Property Name="iletisimAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iletisimMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="iletisimTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iletisimKonu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iletisimMesaj" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_MekanDetay_Mekanlar">
+    <End Role="Mekanlar" Type="Self.Mekanlar" Multiplicity="0..1" />
+    <End Role="MekanDetay" Type="Self.MekanDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mekanlar">
+        <PropertyRef Name="mekanlarId" />
+      </Principal>
+      <Dependent Role="MekanDetay">
+        <PropertyRef Name="mekanlarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mekanlar_Semtler">
+    <End Role="Semtler" Type="Self.Semtler" Multiplicity="0..1" />
+    <End Role="Mekanlar" Type="Self.Mekanlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semtler">
+        <PropertyRef Name="semtId" />
+      </Principal>
+      <Dependent Role="Mekanlar">
+        <PropertyRef Name="semtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Semtler_Sehirler">
+    <End Role="Sehirler" Type="Self.Sehirler" Multiplicity="0..1" />
+    <End Role="Semtler" Type="Self.Semtler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehirler">
+        <PropertyRef Name="sehirId" />
+      </Principal>
+      <Dependent Role="Semtler">
+        <PropertyRef Name="sehirId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NeredeNeYesemEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+    <EntitySet Name="MekanDetay" EntityType="Self.MekanDetay" />
+    <EntitySet Name="Mekanlar" EntityType="Self.Mekanlar" />
+    <EntitySet Name="Sehirler" EntityType="Self.Sehirler" />
+    <EntitySet Name="Semtler" EntityType="Self.Semtler" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Yonetici" EntityType="Self.Yonetici" />
+    <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" />
+    <EntitySet Name="Iletisim" EntityType="Self.Iletisim" />
+    <AssociationSet Name="FK_MekanDetay_Mekanlar" Association="Self.FK_MekanDetay_Mekanlar">
+      <End Role="Mekanlar" EntitySet="Mekanlar" />
+      <End Role="MekanDetay" EntitySet="MekanDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mekanlar_Semtler" Association="Self.FK_Mekanlar_Semtler">
+      <End Role="Semtler" EntitySet="Semtler" />
+      <End Role="Mekanlar" EntitySet="Mekanlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Semtler_Sehirler" Association="Self.FK_Semtler_Sehirler">
+      <End Role="Sehirler" EntitySet="Sehirler" />
+      <End Role="Semtler" EntitySet="Semtler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

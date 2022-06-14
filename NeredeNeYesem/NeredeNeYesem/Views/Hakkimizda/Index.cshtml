@@ -1,0 +1,35 @@
+﻿@using NeredeNeYesem.Models.Siniflar
+@model List<Hakkimizda>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TestLayout.cshtml";
+}
+
+<div class="main-banner-2" id="home">
+    <header>
+        <div class="container-fluid">
+            <div class="header d-md-flex justify-content-between align-items-center py-sm-4 py-3 px-xl-5 px-lg-3 px-2">
+                <!-- logo -->
+                <div id="logo">
+                    @foreach (var x in Model)
+                    {
+                        <img src="@x.FotoUrl" alt="" class="img-fluid" />
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<section class="about-inner py-5">
+    <div class="container pt-xl-5 pt-lg-3">
+        <h3 class="title-w3 mb-5 font-weight-bold">Hakkımızda </h3>
+
+        @foreach (var x in Model)
+        {
+            <p>@x.Aciklama</p>
+        }
+    </div>
+</section>
+

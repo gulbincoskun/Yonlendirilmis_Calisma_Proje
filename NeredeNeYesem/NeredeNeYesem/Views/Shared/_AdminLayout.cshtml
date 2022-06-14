@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/web/css/style3.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="~/web/images/logo.jpeg" alt="profile_picture">
+                <h3>Admin Yönetim Paneli</h3>
+                <p>Nerede Ne Yesem</p>
+            </div>
+            <ul>
+                <li>
+                    <a href="/Admin/hakkimizda/">
+                        <span class="icon"><i class="fas fa-list"></i></span>
+                        <span class="item">Hakkımızda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/Index/">
+                        <span class="icon"><i class="fas fa-building"></i></span>
+                        <span class="item">Yemek Mekanları</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/YorumListesi/">
+                        <span class="icon"><i class="fas fa-comments"></i></span>
+                        <span class="item">Yorumlar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/MesajListesi/">
+                        <span class="icon"><i class="fas fa-phone-square"></i></span>
+                        <span class="item">İletişim</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Default/Index/">
+                        <span class="icon"><i class="fas fa-share"></i></span>
+                        <span class="item">Siteye Git</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/GirisYap/LogOut/">
+                        <span class="icon"><i class="fas fa-reply"></i></span>
+                        <span class="item">Çıkış Yap</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="margin-left:18%; margin-right:10%">
+        <div class="w3-container">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+
+
+

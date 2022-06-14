@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TestLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Nerede Ne Yesem</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="Organic Food Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="~/web/css/bootstrap.css">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="~/web/css/style.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link href="~/web/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic,latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Mada:200,300,400,500,600,700,900&amp;subset=arabic" rel="stylesheet">
+    <!-- //Web-Fonts -->
+</head>
+<body>
+    <div class="breadcrumb-w3ls py-1">
+        <div class="container">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a href="/Default/Index/">Ana Sayfa</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">İletişim
+                <li>
+            </ol>
+        </div>
+    </div>
+    <section class="contact py-5">
+        <div class="container py-xl-5 py-lg-3">
+            <h3 class="title-w3 mb-5 font-weight-bold">İletişim <span>Mesaj Gönder</span></h3>
+            <div class="row">
+
+                <div class="col-lg-6 contact-us1-bottom w3layouts-w3ls">
+                    @using (Html.BeginForm("MesajGonder", "Iletisim", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="İsim" name="AdSoyad" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Mail" name="Mail" required="">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Mesaj" name="Mesaj" required=""></textarea>
+                        </div>
+                        <button class="btn btn-info" id="buton">Gönder</button>
+
+
+                    }
+
+                </div>
+
+                <div class="col-lg-6 home-radio-clock mt-lg-0 mt-5">
+                    <div class="row">
+                        <div class="col-4">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-envelope mr-2" aria-hidden="true"></i>Adres: </li>
+                                <li class="my-5"><i class="fa fa-phone mr-2" aria-hidden="true"></i>Telefon Numarası: </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-8">
+                            <div class="home-radio-clock-right">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        İstanbul
+                                        <span>Türkiye</span>
+                                    </li>
+                                    <li class="my-4">
+                                        0500 000 00 69
+                                        <span>0599 999 09 90</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13239107.191185253!2d20.87921738634885!3d43.80260480840837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1647904456386!5m2!1str!2str"
+                style="border:0" allowfullscreen=""></iframe>
+    </div>
+</body>
+</html>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $('#buton').click(function () {
+        if (AdSoyad != null && Mail != null && Mesaj !=null){
+        swal("Mesaj Gönderildi.", "", "success");
+    }
+    });
+</script>
